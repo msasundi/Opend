@@ -139,8 +139,8 @@ const UserSchema = new Schema({
 
     
 
-},{collection : "opend_campaign_open_full" });
+},{collection : "opend_campaign_click_full" });
 
 mongoose.createConnection('mongodb://db7:majebDic5Ot&@db7opend.tech-active.com:5006/opend_opens_clicks',{ useNewUrlParser: true ,useUnifiedTopology: true });
 
-module.exports = Opens = mongoose.model("opend_campaign_open_full", UserSchema);
+module.exports = Clicks = mongoose.model("opend_campaign_click_full", UserSchema);

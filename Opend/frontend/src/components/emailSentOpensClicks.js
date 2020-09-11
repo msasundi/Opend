@@ -20,7 +20,7 @@ class emailSentBrokeDown extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch(`http://localhost:5000/data`);
+    const response = await fetch(`http://localhost:5000/opens`);
     const json = await response.json();
     options = {
       // title:"Email Sent Breakdown",

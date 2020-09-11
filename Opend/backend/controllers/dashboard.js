@@ -2,24 +2,37 @@
 const { respError,respSuccess} =require('../utils/respHandles');
 const dashboardModule  = require("../modules/dashboardModule")
 
-// exports.Getname = async (req ,res) =>{
-//     dashboardModule.getIndustry
-//     console.log('hey');
-// }
-
-
-exports.Getname = async (req, res) => {
-
+exports.getEmailSentCount = async (req, res) => {
+let result = {}
     try {
-  
       const { id } = req.params
-      const data = await dashboardModule.getIndustry(id)
-      respSuccess(res, data)
-  
+      const data = await dashboardModule.getEmailSentCount(id)
+      Promise.all(data).then((values) => {
+        result = {
+          time : values.map(value => Object.values(value)[0]),
+          count :  values.map(value => Object.values(value)[1])
+        }        
+        respSuccess(res, result)
+        });
     } catch (err) {
-  
-      respError(res, err.message)
-  
+       respError(res, err.message)
     }
-  
+  }
+
+
+  exports.getOpensClicks = async (req, res) =>{
+    let result = {}
+    try {
+      const { id } = req.params
+      const data = await dashboardModule.getOpensClicks(id)
+      Promise.all(data).then((values) => {
+        result = {
+          time : values.map(value => Object.values(value)[0]),
+          count :  values.map(value => Object.values(value)[1])
+        }        
+        respSuccess(res, result)
+        });
+    } catch (err) {
+       respError(res, err.message)
+    }
   }

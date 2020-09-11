@@ -19,7 +19,7 @@ module.exports.respSuccess = (res, obj, message) => {
     if (message) respData = { ...respData, message }
   
     const respObj = {
-      success: true,
+      // success: true,
       ...respData
     };
     res.status(200).json(respObj);
