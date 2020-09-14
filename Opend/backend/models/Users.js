@@ -1,9 +1,7 @@
-const mongoose = require("mongoose");
+var mongoose = require('mongoose')
+var conn2 = mongoose.createConnection('mongodb://db2:Dum_twip8@db2opend.tech-active.com:5006/opend_campaigndb2',{ useNewUrlParser: true ,useUnifiedTopology: true });
 
-const Schema = mongoose.Schema;
-
-const UserSchema = new Schema({
-  
+var Schema = new mongoose.Schema({
     inserted_sent_id: {
         type: String,
         required: true
@@ -161,8 +159,8 @@ const UserSchema = new Schema({
   }
 
 
-},{collection : "opend_campaign_send_full" });
+},{collection : "opend_campaign_send_full" })
 
-mongoose.connect('mongodb://db2:Dum_twip8@db2opend.tech-active.com:5006/opend_campaigndb2',{ useNewUrlParser: true ,useUnifiedTopology: true });
+var model2 = conn2.model('opend_campaign_send_full', Schema);
 
-module.exports = User = mongoose.model("opend_campaign_send_copy", UserSchema);
+module.exports = Opens = model2

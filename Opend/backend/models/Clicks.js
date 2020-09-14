@@ -1,146 +1,69 @@
-const mongoose = require("mongoose");
+var mongoose = require('mongoose')
 
-const Schema = mongoose.Schema;
-
-const UserSchema = new Schema({
-    campaign_id: {
-        type: Number,
-        required: true
-    },
-
-    openrate_clickrate_urls_id: {
-        type: Number,
-        required: true
-    },
-
-    publisher_id: {
-        type: Number,
-        required: true
-    },
-
-    advertiser_id: {
-        type: Number,
-        required: true
-    },
-
-    contact_id: {
-        type: Number,
-        required: true
-    },
-
-    opend_age: {
-        type: Number,
-        required: true
-    },
-
-    opend_location: {
-        type: String,
-        required: true
-    },
-
-
-    opend_gender: {
-        type: String,
-        required: true
-    },
-
-    campaign_email_content_id: {
-        type: String,
-        required: true
-    },
-
-    opend_absplit_config_sub_con_ids: {
-        type: Number,
-        required: true
-    },
-
-    actual_urls: {
-        type: String,
-        required: true
-    },
-
-    mail_token: {
-        type: String,
-        required: true
-    },
-
-    flag: {
-        type: Number,
-        required: true
-    },
-
-    delivery_type: {
-        type: Number,
-        required: true
-    },
-
-    ip: {
-        type: String,
-        required: true
-    },
-
-    user_agent: {
-        type: String,
-        required: true
-    },
-
-    created: {
-        type: String,
-        required: true
-    },
-
+var conn2 = mongoose.createConnection('mongodb://db7:majebDic5Ot&@db7opend.tech-active.com:5006/opend_opens_clicks',{ useNewUrlParser: true ,useUnifiedTopology: true });
+var Schema = new mongoose.Schema({
+    campaign_id: { type: Number },
+    campaign_mode : {type : String},
+    advertiser_id: {type: Number},
+    publisher_id: {type: Number},
+    contact_id: {type: Number},
+    opend_age: {type: Number},
+    opend_location: {type: String},
+    flag: {type: Number},
+    opend_gender: {type: String},
+    campaign_email_content_id: {type: String},
+    opend_absplit_config_sub_con_ids: {type: Number},
+    openrate_clickrate_urls_id : {type : String}, 
+    actual_urls: {type: String},
     converted_url: {
-        type: String,
-        required: true
+        type: String
     },
-
-    timestamp: {
-        type: Number,
-        required: true
+    mail_token: {
+        type: String
     },
-
-    device_type: {
-        type: String,
-        required: true
+    ip: {
+        type: String
     },
-
+    user_agent: {
+        type: String
+    },
+    created: {
+        type: String
+    },
     location: {
-        type: String,
-        required: true
+        type: String
     },
-
+    device_os: {
+        type: String
+    },
+    delivery_type: {
+        type: String
+    },
+    timestamp: {
+        type: Number
+    },
+    open_duration: {
+        type: Number
+    },
     priority: {
-        type: Number,
-        required: true
+        type: Number
     },
 
-    selected_status: {
-        type: Number,
-        required: true
-    },
     email_domain_id: {
-        type: String,
-        required: true
+        type: String
     },
     white_list_flag: {
-        type: String,
-        required: true
+        type: String
     },
     status_flag: {
-        type: String,
-        required: true
+        type: String
     },
     status_details: {
-        type: String,
-        required: true
+        type: String
     }
+},{collection : "opend_campaign_click_full" })
+
+var model2 = conn2.model('opend_campaign_click_full', Schema);
 
 
-
-    
-
-},{collection : "opend_campaign_click_full" });
-
-mongoose.createConnection('mongodb://db7:majebDic5Ot&@db7opend.tech-active.com:5006/opend_opens_clicks',{ useNewUrlParser: true ,useUnifiedTopology: true });
-
-module.exports = Clicks = mongoose.model("opend_campaign_click_full", UserSchema);
+module.exports = Clicks = model2

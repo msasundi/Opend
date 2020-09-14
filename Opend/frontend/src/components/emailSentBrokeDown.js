@@ -28,7 +28,8 @@ class emailSentBrokeDown extends Component {
         categories: json.data.time,
       },
       series: [{
-        data: json.data.count
+        data: json.data.count,
+        name:'opens'
       }]
     }
     // console.log(json);
