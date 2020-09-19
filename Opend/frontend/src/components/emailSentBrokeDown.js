@@ -24,7 +24,7 @@ class emailSentBrokeDown extends Component {
     const json = await response.json();
     options = {
       // title:"Email Sent Breakdown",
-      xAxis: {
+      xAxis: { 
         categories: json.data.time,
       },
       series: [{

@@ -45,17 +45,17 @@ class emailSentOpensClicks  extends React.Component {
           data: [
             {
               y: json.data.count_clicks,
-              name :"Clicks"+ ('('+ json.data.count_clicks +')'),
+              name :"Clicks",
               color : '#ffa200'
             },
             {
               y: json.data.count_opens,
-              name :"Opens" +('('+json.data.count_opens+')'),
+              name :"Opens",
               color : '#12d63c'
             },
             {
               y: json.data.data,
-              name : "Total sent"+ ('('+json.data.data +')'),
+              name : "Total sent",
               color : "#646464"
             }
           ]

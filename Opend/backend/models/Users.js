@@ -161,6 +161,8 @@ var Schema = new mongoose.Schema({
 
 },{collection : "opend_campaign_send_full" })
 
+// mongoose.set('debug', true);
+
 var model2 = conn2.model('opend_campaign_send_full', Schema);
 
 module.exports = Opens = model2

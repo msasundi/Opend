@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
         <Router>
       <div>
-      <Route exact path="/session_id:session_id"  component={Dashboard} />
+          <Route exact path="/session_id:id"  component={Dashboard} />
       </div>
         </Router>
     );

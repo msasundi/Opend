@@ -12,15 +12,21 @@ var now = new Date();
   
 exports.getEmailSentCount = async (id) => 
 {
-  let newArr = new Array(24).fill(0)
+  // console.log('date came finally')
+
+  // let _d1 = moment(id.params).format('YYYY-MM-DD');
+
+  // console.log(_d1);
+
+let newArr = new Array(24).fill(0)
   
 let _d = moment().format('YYYY-MM-DD');
-console.log(_d)
+// console.log(_d)
 let _arr = newArr.map(async (data1,i) =>
 {
   let _start = (strtotime(`${_d} ${i}:00:00`));
   let _end = (strtotime(`${_d} ${i+1}:00:00`));
-  console.log(_start);
+  // console.log(_start);
   let data = await User.aggregate([
 {
 $match: {
@@ -236,6 +242,108 @@ exports.getClicks = (search) => new Promise((resolve, reject) => {
   }).catch(reject)
 
 })
+
+
+
+exports.getEmailmainCount = (search) => new Promise((resolve, reject) => {
+
+  let _d = moment(search).format('YYYY-MM-DD');
+  let _start = '';
+  let _end = ''
+
+  for(var i =0 ; i < 1; i++){
+     _start = (strtotime(`${_d} ${i}:00:00`));
+     _end = (strtotime(search.params));
+  }
+
+  const execQuery = User.aggregate([
+    {
+      $match: {
+      status : 0,
+      $and: [
+      //   {
+      //   send_time: {
+      // $gt: (_start)
+      // }
+      // },
+       {
+        send_time: {
+      $lt: (_end)
+      }
+      }]
+      }
+      },
+      {
+        "$group": {
+          "_id": {email: "$campaign_id"},
+          count: { $sum : 1 }
+        }
+        
+      },{
+        $project:{
+          _id:0,
+          count:1
+        }
+      }
+   ])
+
+
+   execQuery
+
+  execQuery.then((doc) => {
+      // data :docs 
+      resolve(doc)
+     
+    }).catch(reject)
+
+})
+
+
+
+// exports.getEmailmainCount = async (id) => 
+// {
+//   let _d1 = moment(id).format('YYYY-MM-DD');
+//   let newArr = new Array(24).fill(0)
+//   let _d = moment().format('YYYY-MM-DD');
+//   let _arr = newArr.map(async (data1,i) =>
+//   {
+//     let _start = (strtotime(`${_d} ${i}:00:00`));
+//     let _end = (strtotime(`${_d} ${i+1}:00:00`));
+//     let data = await User.aggregate([
+//     {
+//       $match: {
+//       $and: [{
+//           send_time: {
+//               $gt: (_start)
+//             }
+//           }, {
+//           send_time: {
+//               $lt: (_end)
+//             }
+//           }]
+//       }
+//     },
+//     {
+//       "$group": {
+//           "_id": {email: "$status"},
+//           count: { $sum : 1 }
+//       }
+//     },
+// {
+//   '$project':{
+//     _id:0,
+//     count:1
+//   }
+
+// }
+// ]).exec().then((docs) =>( {time_z :moment(new Date(_start * 1000)).format("H:m"), data: docs.reduce((data, index)=>{
+//   return index.count;
+//   },0) })).catch()
+// return data;
+// })
+// return _arr;
+// }
+
 
 
 
