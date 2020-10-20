@@ -1,58 +1,96 @@
-import React from 'react'
-import axios from "axios"
+import React, { Component } from 'react'
+import axios from 'axios'
+import Table from 'react-bootstrap/Table'
 
-import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
-let options = {
-  title: {
-    text: 'Email Sent Breakdown'
-  },
-  series: [{
-    data: []
-  }]
+export default class maingraph extends Component {
+  constructor(props){
+    super(props)
+    this.state= {
+      data:[]
+    }
+  }
+
+  componentDidMount() {
+    // POST request using axios with error handling
+    const article = { 'timestamp': this.props.filterData , 'campaign_type': this.props.getcampaigntype};
+    axios.post('http://localhost:5000/data', article)
+        .then(response => console.log(response.data.data))
+        // .catch(error => {
+        //     // this.setState({ errorMessage: error.message });
+        //     console.log('data', response);
+        // });
+}
+
+  componentDidUpdate() {
+    const article = { 'timestamp': this.props.filterData , 'campaign_type': this.props.getcampaigntype};
+    axios.post('http://localhost:5000/data', article)
+        .then(response =>  console.log(response.data.data))
+        // .catch(error => {
+        //     // this.setState({ errorMessage: error.message });
+        //     console.log('data', response);
+        // });
 }
 
 
-export default function maingraph(props) {
-    const prosVa= props
-    console.log(props);
 
-    axios({
-    method: 'post',
-    url: 'http://localhost:5000/main',
-    data: prosVa
-  }).then(res => {
-    console.log(res);
-    // options = {
-    //   // title:"Email Sent Breakdown",
-    //   xAxis: { 
-    //     categories: res.data.data.count,
-    //   },
-    //   series: [{
-    //     data: json.data.count,
-    //     name:'opens'
-    //   }]
-    // }
-
-  // console.log('my_consolelog');  
-//  console.log(res);   
-    // const persons = res.data;
-    // this.setState({ persons });
-  });
-
-
+  render() {
     return (
+      <div>
+  <h2> {this.props.filterData} ---{this.props.getcampaigntype}----{this.state.data}</h2>
+  {/* <ul>
+                      {this.state.data.map(el => (
+                     <li key={el.time}>
+                        {el.time}: {el.data}
+                    </li>
+                  ))}
+                </ul> */}
         <div>
-           <HighchartsReact
-                highcharts={Highcharts}
-                  options={options}
-                />
-              {/* <h1>came</h1> */}
-        </div>
+  <Table responsive="sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Table heading</th>
+        <th>Table heading</th>
+        <th>Table heading</th>
+        <th>Table heading</th>
+        <th>Table heading</th>
+        <th>Table heading</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+        <td>Table cell</td>
+      </tr>
+    </tbody>
+  </Table>  
+</div>
+      </div>
     )
+  }
 }
-
-
-// Make a GET request
-
   
+

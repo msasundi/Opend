@@ -1,8 +1,8 @@
 import React from 'react' 
 import "react-datepicker/dist/react-datepicker.css";
-import EmailSentCount from "../components/emailSentBrokeDown"
-import EmailSentOpensClicks from "../components/emailSentOpensClicks"
-import MainGraph from "../components/maingraph"
+// import EmailSentCount from "../components/emailSentBrokeDown"
+// import EmailSentOpensClicks from "../components/emailSentOpensClicks"
+
 import Header from "../components/navigation"
 import GetData from "../components/getparams"
 
@@ -15,10 +15,11 @@ class Dashboard extends React.Component {
         
     }
 
-    state = {
-        startDate: new Date(),
-        endDate: new Date()
-    };
+        state = {
+            startDate: new Date(),
+            endDate: new Date()
+        };
+    
     
     handleDateSelect = (stdate) => {
         // console.log(stdate, 'date');
@@ -32,7 +33,7 @@ class Dashboard extends React.Component {
             <div>
             <Header />
             <GetData handleDateSelect={this.handleDateSelect} />
-                <MainGraph params={this.state.startDate} /> 
+                {/* <MainGraph params={this.state.startDate} />  */}
                 {/* <EmailSentCount params={this.state.startDate} />  */}
                 {/* <EmailSentOpensClicks params={this.state.startDate} />  */}
               </div>    
